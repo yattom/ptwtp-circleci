@@ -33,8 +33,8 @@ def add(task):  # type: (Task) -> int
         raise ValueError('task.id must None')
     if _tasksdb is None:
         raise UninitializedDatabase()
-    task_id = _tasksdb.add(task._asdict())
-    return task_id
+    # task_id = _tasksdb.add(task._asdict())
+    # return task_id
 
 
 def get(task_id):  # type: (int) -> Task
@@ -65,12 +65,12 @@ def count():  # type: (None) -> int
 
 def update(task_id, task):  # type: (int, Task) -> None
     """Modify task in db with given task_id."""
-    # if not isinstance(task_id, int):
-    #     raise TypeError('task_id must be an int')
-    # if not isinstance(task, Task):
-    #     raise TypeError('task must be Task object')
-    # if _tasksdb is None:
-    #     raise UninitializedDatabase()
+    if not isinstance(task_id, int):
+        raise TypeError('task_id must be an int')
+    if not isinstance(task, Task):
+        raise TypeError('task must be Task object')
+    if _tasksdb is None:
+        raise UninitializedDatabase()
     current_task = _tasksdb.get(task_id)
     updates = task._asdict()
     for field in task._fields:
