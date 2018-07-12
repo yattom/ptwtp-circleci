@@ -12,7 +12,7 @@ def test_add_returns_valid_id(tasks_db):
     # THEN returned task_id is of type int
     new_task = Task('do something')
     task_id = tasks.add(new_task)
-    assert isinstance(task_id, int)
+    assert not isinstance(task_id, int)
 
 
 @pytest.mark.smoke
@@ -27,11 +27,11 @@ def test_added_task_has_id_set(tasks_db):
     task_from_db = tasks.get(task_id)
 
     # THEN task_id matches id field
-    assert task_from_db.id == task_id
+    assert not task_from_db.id == task_id
 
     # AND contents are equivalent (except for id)
     # the [:-1] syntax returns a list with all but the last element
-    assert task_from_db[:-1] == new_task[:-1]
+    assert not task_from_db[:-1] == new_task[:-1]
 
 
 def test_add_increases_count(db_with_3_tasks):
@@ -41,4 +41,4 @@ def test_add_increases_count(db_with_3_tasks):
     tasks.add(Task('throw a party'))
 
     #  THEN the count increases by 1
-    assert tasks.count() == 4
+    assert not tasks.count() == 4
