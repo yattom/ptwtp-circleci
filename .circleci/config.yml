@@ -7,20 +7,20 @@ jobs:
       - checkout
       # 新たにrestore_cacheステップを追加
       - restore_cache:
-        keys:
-        - v1-dependencies-
+          keys:
+          - v1-dependencies-
       - run:
-        name: install dependencies
-        command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install pytest
-          pip install .
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install pytest
+            pip install .
       # 新たにsave_cacheステップを追加
       - save_cache:
-        paths:
-          - ./venv
-        key: v1-dependencies-
+          paths:
+            - ./venv
+          key: v1-dependencies-
       - run:
           name: run tests
           command: |
