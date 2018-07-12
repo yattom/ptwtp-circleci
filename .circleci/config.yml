@@ -26,3 +26,4 @@ jobs:
           command: |
             . venv/bin/activate
             pytest
+
