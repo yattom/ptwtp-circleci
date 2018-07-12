@@ -9,7 +9,6 @@ jobs:
       - restore_cache:
         keys:
         - v1-dependencies-
-
       - run:
         name: install dependencies
         command: |
@@ -17,13 +16,11 @@ jobs:
           . venv/bin/activate
           pip install pytest
           pip install .
-
       # 新たにsave_cacheステップを追加
       - save_cache:
         paths:
           - ./venv
         key: v1-dependencies-
-
       - run:
           name: run tests
           command: |
