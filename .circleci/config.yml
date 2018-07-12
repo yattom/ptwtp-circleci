@@ -5,13 +5,25 @@ jobs:
       - image: circleci/python:3.6.1
     steps:
       - checkout
+      # 新たにrestore_cacheステップを追加
+      - restore_cache:
+        keys:
+        - v1-dependencies-
+
       - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install .
-            pip install pytest
+        name: install dependencies
+        command: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install pytest
+          pip install .
+
+      # 新たにsave_cacheステップを追加
+      - save_cache:
+        paths:
+          - ./venv
+        key: v1-dependencies-
+
       - run:
           name: run tests
           command: |
